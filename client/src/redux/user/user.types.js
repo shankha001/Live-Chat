@@ -1,0 +1,4 @@
+export const UserActionTypes = {
+  SET_CURRENT_USER: 'SET_CURRENT_USER',
+  SET_CURRENT_CHANNEL: 'SET_CUURENT_CHANNEL',
+};
