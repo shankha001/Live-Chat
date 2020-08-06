@@ -10,6 +10,11 @@ app.get('/', (req, res) => {
 //====SOCKET.IO CONFIG====//
 io.on('connection', (socket) => {
   console.log('a user connected');
+
+  socket.on('login', ({ currentUser, currentChannel }) => {
+    console.log(currentChannel);
+    console.log(currentUser);
+  });
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
