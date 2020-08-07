@@ -29,20 +29,20 @@ io.on('connection', (socket) => {
 
     if (error) return cb(error);
 
-    socket.join(user.currentChannel);
+    socket.join(currentChannel); // join currentChannel
 
     socket.emit('message', { user: 'admin', msg: `Welcome ${currentUser}` });
-    socket.broadcast.to(user.currentChannel).emit('message', {
+    socket.broadcast.to(currentChannel).emit('message', {
       user: 'admin',
       msg: `${currentUser} joined the Chat`,
-    });
+    }); // broadcast userJoin to others in currentChannel
 
     cb();
   });
 
   socket.on('chat message', (msg) => {
     const user = getUser(socket.id);
-    // console.log(user);
+    console.log(msg);
     socket.emit('message', {
       user: user.name,
       text: msg,

@@ -14,7 +14,7 @@ function Chatroom({ currentUser, currentChannel }) {
   const SERVER = 'localhost:5000';
 
   // socket = socketIOClient(SERVER);
-  const [message, setMessage] = useState('');
+  const [chat, setChat] = useState('');
   useEffect(() => {
     socket = socketIOClient(SERVER);
 
@@ -38,9 +38,8 @@ function Chatroom({ currentUser, currentChannel }) {
   const sendMessage = (event) => {
     event.preventDefault();
 
-    if (message) {
-      socket.emit('chat message', message, () => setMessage(''));
-    }
+    socket.emit('chat message', chat);
+    setChat('');
   };
 
   return (
@@ -49,8 +48,8 @@ function Chatroom({ currentUser, currentChannel }) {
       <form onSubmit={sendMessage}>
         <input
           type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          value={chat}
+          onChange={(e) => setChat(e.target.value)}
         />
         <button type="submit">Send Message</button>
       </form>
