@@ -29,6 +29,12 @@ function Chatroom({ currentUser, currentChannel }) {
     });
   }, [SERVER, currentUser, currentChannel]);
 
+  useEffect(() => {
+    socket.on('message', (message) => {
+      console.log(message);
+    });
+  }, []);
+
   const sendMessage = (event) => {
     event.preventDefault();
 

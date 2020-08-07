@@ -1,5 +1,4 @@
 const cors = require('cors');
-
 const app = require('express')();
 app.use(cors()); //cross-origin-resource-sharing
 
@@ -7,7 +6,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
 //===HELPER-FUNCTION===//
-const { addUser } = require('./helper');
+const { addUser, getUser } = require('./helper');
 
 const PORT = process.env.PORT || 5000;
 
@@ -17,7 +16,7 @@ app.get('/', (req, res) => {
 
 //====SOCKET.IO CONFIG====//
 io.on('connection', (socket) => {
-  // console.log('a user connected');
+  console.log('a user connected');
 
   socket.on('login', ({ currentUser, currentChannel }, cb) => {
     // console.log(currentChannel);
@@ -30,16 +29,28 @@ io.on('connection', (socket) => {
 
     if (error) return cb(error);
 
-    socket.emit('message', { user: 'admin', text: 'welcome' });
-    socket.broadcast
-      .to(user.currentChannel)
-      .emit('message', { user: 'admin', text: 'user joiner' });
     socket.join(user.currentChannel);
+
+    socket.emit('message', { user: 'admin', msg: `Welcome ${currentUser}` });
+    socket.broadcast.to(user.currentChannel).emit('message', {
+      user: 'admin',
+      msg: `${currentUser} joined the Chat`,
+    });
+
     cb();
   });
 
   socket.on('chat message', (msg) => {
-    console.log('message:' + msg);
+    const user = getUser(socket.id);
+    // console.log(user);
+    socket.emit('message', {
+      user: user.name,
+      text: msg,
+    });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User Disconnected');
   });
 });
 

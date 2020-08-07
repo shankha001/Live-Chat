@@ -21,4 +21,4 @@ const addUser = ({ id, currentUser, currentChannel }) => {
 
 const getUser = (id) => users.find((user) => user.id === id);
 
-module.exports = { addUser };
+module.exports = { addUser, getUser };
