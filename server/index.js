@@ -42,8 +42,9 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', (msg) => {
     const user = getUser(socket.id);
-    console.log(msg);
-    socket.emit('message', {
+    // console.log(msg);
+    // console.log(user);
+    io.to(user.channel).emit('message', {
       user: user.name,
       text: msg,
     });

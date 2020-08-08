@@ -18,6 +18,8 @@ function Chatroom({ currentUser, currentChannel }) {
 
   // socket = socketIOClient(SERVER);
   const [chat, setChat] = useState('');
+  const [chats, setChats] = useState([]);
+
   useEffect(() => {
     socket = socketIOClient(SERVER);
 
@@ -33,8 +35,8 @@ function Chatroom({ currentUser, currentChannel }) {
   }, [SERVER, currentUser, currentChannel]);
 
   useEffect(() => {
-    socket.on('message', (message) => {
-      console.log(message);
+    socket.on('message', (chat) => {
+      setChats((chats) => [...chats, chat]);
     });
   }, []);
 
@@ -48,6 +50,7 @@ function Chatroom({ currentUser, currentChannel }) {
   return (
     <React.Fragment>
       <div className="chatbox__container">
+        {console.log(chats)}
         <Chatbox sendMessage={sendMessage} setChat={setChat} chat={chat} />
       </div>
     </React.Fragment>
