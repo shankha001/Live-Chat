@@ -8,6 +8,9 @@ import {
 
 import socketIOClient from 'socket.io-client';
 import { useState } from 'react';
+import Chatbox from '../../components/chatbox/chatbox';
+import './style/chatroom.styles.scss';
+
 let socket;
 
 function Chatroom({ currentUser, currentChannel }) {
@@ -24,7 +27,7 @@ function Chatroom({ currentUser, currentChannel }) {
 
     socket.emit('login', { currentUser, currentChannel }, (error) => {
       if (error) {
-        alert(error);
+        // alert(error);
       }
     });
   }, [SERVER, currentUser, currentChannel]);
@@ -37,23 +40,17 @@ function Chatroom({ currentUser, currentChannel }) {
 
   const sendMessage = (event) => {
     event.preventDefault();
-
+    // console.log(socket);
     socket.emit('chat message', chat);
     setChat('');
   };
 
   return (
-    <div>
-      <h1>Chatroom</h1>
-      <form onSubmit={sendMessage}>
-        <input
-          type="text"
-          value={chat}
-          onChange={(e) => setChat(e.target.value)}
-        />
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
+    <React.Fragment>
+      <div className="chatbox__container">
+        <Chatbox sendMessage={sendMessage} setChat={setChat} chat={chat} />
+      </div>
+    </React.Fragment>
   );
 }
 
