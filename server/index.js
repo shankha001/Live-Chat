@@ -26,11 +26,14 @@ io.on('connection', (socket) => {
       currentUser,
       currentChannel,
     });
+    const users = [];
 
     if (error) return cb(error);
 
     socket.join(currentChannel); // join currentChannel
+    let newuser = getUser(socket.id);
 
+    users.push[newuser.name];
     socket.emit('message', { user: 'admin', msg: `Welcome ${currentUser}` });
     socket.broadcast.to(currentChannel).emit('message', {
       user: 'admin',
@@ -46,7 +49,7 @@ io.on('connection', (socket) => {
     // console.log(user);
     io.to(user.channel).emit('message', {
       user: user.name,
-      text: msg,
+      msg: msg,
     });
   });
 

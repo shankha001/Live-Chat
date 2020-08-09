@@ -51,12 +51,16 @@ function Chatroom({ currentUser, currentChannel }) {
   return (
     <div className="chatroom__page">
       <div className="chatroom__container">
-        {console.log(chats)}
         <div className="chatroom__info">
           <UserInfo />
         </div>
         <div className="chatroom__chatbox">
-          <Chatbox sendMessage={sendMessage} setChat={setChat} chat={chat} />
+          <Chatbox
+            sendMessage={sendMessage}
+            setChat={setChat}
+            chat={chat}
+            chats={chats}
+          />
         </div>
       </div>
     </div>

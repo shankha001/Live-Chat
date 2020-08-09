@@ -8,10 +8,18 @@ import {
 import './style/chatbox.styles.scss';
 import SendIcon from '@material-ui/icons/Send';
 
-function Chatbox({ sendMessage, setChat, chat, currentUser, currentChannel }) {
+function Chatbox({
+  sendMessage,
+  setChat,
+  chat,
+  currentUser,
+  currentChannel,
+  chats,
+}) {
   // console.log(currentUser);
   return (
     <React.Fragment>
+      {console.log(chats)}
       <div className="chat__container">
         <div className="chat__navbar">
           <div className="user">
@@ -21,7 +29,21 @@ function Chatbox({ sendMessage, setChat, chat, currentUser, currentChannel }) {
             </div>
           </div>
         </div>
-        <div className="chat__msg">hello</div>
+        <div className="chat__msg">
+          {chats.map((chat) =>
+            chat.user !== currentUser ? (
+              <div className="chat__msg-receiver">
+                <p>{chat.user}</p>
+                <p>{chat.msg}</p>
+              </div>
+            ) : (
+              <div className="chat__msg-sender">
+                <p>{chat.user}</p>
+                <p>{chat.msg}</p>
+              </div>
+            )
+          )}
+        </div>
         <div className="chat__input">
           <form onSubmit={sendMessage}>
             <input
