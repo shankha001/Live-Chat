@@ -12,15 +12,12 @@ function Chatbox({ sendMessage, setChat, chat, currentUser, currentChannel }) {
   // console.log(currentUser);
   return (
     <React.Fragment>
-      Channel : {currentChannel}
       <div className="chat__container">
         <div className="chat__navbar">
           <div className="user">
             <div className="user__name">
-              <span style={{ color: 'green', marginRight: '10px' }}>
-                &#9673;
-              </span>
-              {currentUser}
+              <span style={{ color: 'green', marginRight: ' 5px ' }}>#</span>
+              {currentChannel}
             </div>
           </div>
         </div>
@@ -35,7 +32,7 @@ function Chatbox({ sendMessage, setChat, chat, currentUser, currentChannel }) {
               onChange={(e) => setChat(e.target.value)}
             />
             <button type="submit" className="chat__input-btn">
-              <SendIcon style={{ fontSize: '35px', color: 'grey' }} />
+              <SendIcon style={{ fontSize: '35px', color: '#303f9f' }} />
             </button>
           </form>
         </div>

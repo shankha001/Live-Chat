@@ -20,6 +20,7 @@ function Login(props) {
   return (
     <div>
       <div className="login-container">
+        <h2 className="login-title">LIVE CHAT</h2>
         <FormControl required={true}>
           <TextField
             id="outlined-search"

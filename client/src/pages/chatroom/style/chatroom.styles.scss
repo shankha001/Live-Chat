@@ -1,4 +1,22 @@
-.chatbox__container {
-  width: 50%;
-  margin: 50px auto;
+.chatroom {
+  &__page {
+    height: 100vh;
+    position: relative;
+    margin: 0 auto;
+  }
+  &__container {
+    width: 700px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: flex;
+  }
+  &__info {
+    width: 30%;
+  }
+  &__chatbox {
+    width: 70%;
+  }
 }

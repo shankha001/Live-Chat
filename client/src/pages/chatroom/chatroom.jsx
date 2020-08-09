@@ -10,6 +10,7 @@ import socketIOClient from 'socket.io-client';
 import { useState } from 'react';
 import Chatbox from '../../components/chatbox/chatbox';
 import './style/chatroom.styles.scss';
+import UserInfo from '../../components/userinfo/userinfo';
 
 let socket;
 
@@ -48,12 +49,17 @@ function Chatroom({ currentUser, currentChannel }) {
   };
 
   return (
-    <React.Fragment>
-      <div className="chatbox__container">
+    <div className="chatroom__page">
+      <div className="chatroom__container">
         {console.log(chats)}
-        <Chatbox sendMessage={sendMessage} setChat={setChat} chat={chat} />
+        <div className="chatroom__info">
+          <UserInfo />
+        </div>
+        <div className="chatroom__chatbox">
+          <Chatbox sendMessage={sendMessage} setChat={setChat} chat={chat} />
+        </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 

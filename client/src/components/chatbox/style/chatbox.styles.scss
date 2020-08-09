@@ -1,6 +1,5 @@
 .chat {
   &__container {
-    margin-top: 20px;
     border: 1px solid grey;
     border-radius: 5px;
     box-shadow: 2px 3px 1px rgba(black, 0.2);
@@ -10,7 +9,7 @@
     .user {
       padding: 10px 15px;
       color: white;
-      background-color: lightgrey;
+      background-color: #303f9f;
     }
   }
   &__msg {

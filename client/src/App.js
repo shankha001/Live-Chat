@@ -6,10 +6,12 @@ import Chat from './pages/chatroom/chatroom';
 
 function App() {
   return (
-    <Switch>
-      <Route exact path="/" component={Login} />
-      <Route path="/chat" component={Chat} />
-    </Switch>
+    <div className="App">
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route path="/chat" component={Chat} />
+      </Switch>
+    </div>
   );
 }
 
