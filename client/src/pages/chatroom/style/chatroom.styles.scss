@@ -5,6 +5,7 @@
     margin: 0 auto;
   }
   &__container {
+    height: 530px;
     width: 700px;
     position: absolute;
     left: 50%;
@@ -15,8 +16,10 @@
   }
   &__info {
     width: 30%;
+    height: 100%;
   }
   &__chatbox {
+    height: 100%;
     width: 70%;
   }
 }

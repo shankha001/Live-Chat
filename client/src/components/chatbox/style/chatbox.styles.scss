@@ -1,27 +1,44 @@
 .chat {
   &__container {
-    border: 1px solid grey;
-    border-radius: 5px;
-    box-shadow: 2px 3px 1px rgba(black, 0.2);
+    border: 1px solid #303f9f;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    box-shadow: 2px 3px 9px rgba(#303f9f, 0.4);
   }
   &__navbar {
     border-bottom: 1px solid black;
+
     .user {
       padding: 10px 15px;
       color: white;
       background-color: #303f9f;
+      &__channel {
+        font-size: 18px;
+        letter-spacing: 1.2px;
+        display: inline-block;
+        cursor: pointer;
+
+        text-shadow: 1px 2px 5px rgba(black, 0.5);
+      }
     }
   }
   &__msg {
     height: 400px;
-    padding: 10px 15px;
+    padding: 10px 20px;
+    overflow-y: scroll;
 
     &-sender {
       width: 100%;
       text-align: right;
+      margin-bottom: 10px;
     }
     &-receiver {
       width: 100%;
+      margin-bottom: 10px;
     }
   }
   &__input {

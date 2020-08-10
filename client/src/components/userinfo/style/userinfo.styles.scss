@@ -2,8 +2,10 @@
   &__container {
     padding: 10px;
     border: 1px solid black;
-    height: 96%;
-    border-radius: 5px;
+    height: 94%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
     background-color: #303f9f;
     color: white;
     text-align: center;
