@@ -18,6 +18,8 @@ function Chatroom({ currentUser, currentChannel }) {
   const SERVER = 'localhost:5000';
 
   // socket = socketIOClient(SERVER);
+  const [users, setUsers] = useState('');
+
   const [chat, setChat] = useState('');
   const [chats, setChats] = useState([]);
 
@@ -39,12 +41,19 @@ function Chatroom({ currentUser, currentChannel }) {
     socket.on('message', (chat) => {
       setChats((chats) => [...chats, chat]);
     });
+
+    socket.on('channelUsers', ({ users }) => {
+      setUsers(users);
+      // console.log(users);
+    });
   }, []);
 
   const sendMessage = (event) => {
     event.preventDefault();
     // console.log(socket);
-    socket.emit('chat message', chat);
+    if (chat) {
+      socket.emit('chat message', chat);
+    }
     setChat('');
   };
 
@@ -52,7 +61,7 @@ function Chatroom({ currentUser, currentChannel }) {
     <div className="chatroom__page">
       <div className="chatroom__container">
         <div className="chatroom__info">
-          <UserInfo />
+          <UserInfo usersonline={users} />
         </div>
         <div className="chatroom__chatbox">
           <Chatbox

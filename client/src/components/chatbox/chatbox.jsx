@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {
@@ -45,30 +45,34 @@ function Chatbox({
           {chats.map((chat) =>
             chat.user !== currentUser ? (
               <div className="chat__msg-receiver">
-                <p
-                  style={{
-                    color: '#132079',
-                    marginBottom: '5px',
-                    textTransform: 'capitalize',
-                    fontWeight: '600',
-                  }}
-                >
-                  {chat.user}
-                </p>
-                <p>{chat.msg}</p>
+                <div className="chat__msg-receiver-inner">
+                  <p
+                    style={{
+                      color: '#132079',
+                      marginBottom: '5px',
+                      textTransform: 'capitalize',
+                      fontWeight: '600',
+                      textAlign: 'left',
+                    }}
+                  >
+                    {chat.user}
+                  </p>
+                  <p>{chat.msg}</p>
+                </div>
               </div>
             ) : (
               <div className="chat__msg-sender">
-                <p
-                  style={{
-                    color: '#132079',
-                    marginBottom: '5px',
-                    fontWeight: '600',
-                  }}
-                >
-                  You
-                </p>
-                <p>{chat.msg}</p>
+                <div className="chat__msg-sender-inner">
+                  <p
+                    style={{
+                      color: '#132079',
+                      marginBottom: '5px',
+                      fontWeight: '600',
+                      textAlign: 'left',
+                    }}
+                  ></p>
+                  <p>{chat.msg}</p>
+                </div>
               </div>
             )
           )}

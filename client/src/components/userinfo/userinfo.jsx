@@ -5,13 +5,18 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import './style/userinfo.styles.scss';
 
-function UserInfo({ currentUser, users }) {
+function UserInfo({ currentUser, usersonline }) {
   return (
     <div className="userinfo__container">
       <h4>Your Name :</h4>
       <p> {currentUser}</p>
       <h4>Users :</h4>
-      {console.log(users)}
+      {console.log(usersonline)}
+      {usersonline
+        ? usersonline.map((user) => (
+            <p style={{ marginBottom: '10px' }}>{user.name}</p>
+          ))
+        : null}
     </div>
   );
 }

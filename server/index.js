@@ -6,7 +6,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
 //===HELPER-FUNCTION===//
-const { addUser, getUser } = require('./helper');
+const { addUser, getUser, getUsersOnline } = require('./helper');
 
 const PORT = process.env.PORT || 5000;
 
@@ -32,13 +32,18 @@ io.on('connection', (socket) => {
 
     socket.join(currentChannel); // join currentChannel
     let newuser = getUser(socket.id);
-
+    console.log(getUsersOnline(currentChannel));
     users.push[newuser.name];
     socket.emit('message', { user: 'admin', msg: `Welcome ${currentUser}` });
     socket.broadcast.to(currentChannel).emit('message', {
       user: 'admin',
       msg: `${currentUser} joined the Chat`,
     }); // broadcast userJoin to others in currentChannel
+
+    io.to(user.channel).emit('channelUsers', {
+      room: user.currentChannel,
+      users: getUsersOnline(currentChannel),
+    });
 
     cb();
   });

@@ -8,17 +8,17 @@ const addUser = ({ id, currentUser, currentChannel }) => {
     (user) => user.channel === channel && user.name === name
   );
   if (existingUser) {
-    // console.log('trigger');
     return { error: 'UserName Taken' };
   } else {
     const user = { id, name, channel };
     users.push(user);
-    // console.log(users);
-
     return { user };
   }
 };
 
 const getUser = (id) => users.find((user) => user.id === id);
 
-module.exports = { addUser, getUser };
+const getUsersOnline = (channel) =>
+  users.filter((user) => user.channel === channel);
+
+module.exports = { addUser, getUser, getUsersOnline };
