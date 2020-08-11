@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
 
     socket.join(currentChannel); // join currentChannel
     let newuser = getUser(socket.id);
-    console.log(getUsersOnline(currentChannel));
+    // console.log(getUsersOnline(currentChannel));
     users.push[newuser.name];
     socket.emit('message', { user: 'admin', msg: `Welcome ${currentUser}` });
     socket.broadcast.to(currentChannel).emit('message', {

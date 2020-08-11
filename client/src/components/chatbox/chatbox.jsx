@@ -22,7 +22,6 @@ function Chatbox({
 
   return (
     <React.Fragment>
-      {console.log(chats)}
       <div className="chat__container">
         <div className="chat__navbar">
           <div className="user">
@@ -42,9 +41,9 @@ function Chatbox({
         </div>
 
         <ScrollToBottom className="chat__msg">
-          {chats.map((chat) =>
+          {chats.map((chat, idx) =>
             chat.user !== currentUser ? (
-              <div className="chat__msg-receiver">
+              <div key={idx} className="chat__msg-receiver">
                 <div className="chat__msg-receiver-inner">
                   <p
                     style={{
@@ -55,7 +54,7 @@ function Chatbox({
                       textAlign: 'left',
                     }}
                   >
-                    {chat.user}
+                    {chat.user === 'admin' ? `👮🏻 ${chat.user}` : chat.user}
                   </p>
                   <p>{chat.msg}</p>
                 </div>

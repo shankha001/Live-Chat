@@ -11,10 +11,11 @@ function UserInfo({ currentUser, usersonline }) {
       <h4>Your Name :</h4>
       <p> {currentUser}</p>
       <h4>Users :</h4>
-      {console.log(usersonline)}
       {usersonline
-        ? usersonline.map((user) => (
-            <p style={{ marginBottom: '10px' }}>{user.name}</p>
+        ? usersonline.map((user, idx) => (
+            <p key={idx} style={{ marginBottom: '10px' }}>
+              {user.name}
+            </p>
           ))
         : null}
     </div>

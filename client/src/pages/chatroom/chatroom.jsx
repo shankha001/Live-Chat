@@ -27,12 +27,11 @@ function Chatroom({ currentUser, currentChannel }) {
     socket = socketIOClient(SERVER);
 
     socket.on('connect', function () {
-      console.log('connected');
+      // console.log('connected');
     });
 
     socket.emit('login', { currentUser, currentChannel }, (error) => {
       if (error) {
-        // alert(error);
       }
     });
   }, [SERVER, currentUser, currentChannel]);
@@ -44,13 +43,11 @@ function Chatroom({ currentUser, currentChannel }) {
 
     socket.on('channelUsers', ({ users }) => {
       setUsers(users);
-      // console.log(users);
     });
   }, []);
 
   const sendMessage = (event) => {
     event.preventDefault();
-    // console.log(socket);
     if (chat) {
       socket.emit('chat message', chat);
     }
