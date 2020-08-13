@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './style/login.styles.scss';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./style/login.styles.scss";
 import {
   setCurrentUser,
   setCurrentChannel,
-} from '../../redux/user/user.actions';
+} from "../../redux/user/user.actions";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
 
-function Login(props) {
-  const { setCurrentUser, setCurrentChannel } = props;
-  const [name, setName] = useState('');
-  const [channel, setChannel] = useState('');
+function Login({ setCurrentUser, setCurrentChannel, location }) {
+  console.log(location);
+  // const { setCurrentUser, setCurrentChannel } = props;
+  const [errormsg, seterrormsg] = useState("");
+  useEffect(() => {
+    if (location.state) {
+      seterrormsg(location.state.error);
+    }
+  }, [location]);
+
+  const [name, setName] = useState("");
+  const [channel, setChannel] = useState("");
 
   return (
     <div>
@@ -38,7 +46,7 @@ function Login(props) {
             type="search"
             variant="outlined"
             className="login-input"
-            style={{ margin: '10px auto' }}
+            style={{ margin: "10px auto" }}
             onChange={(event) => setChannel(event.target.value)}
             required={true}
             value={channel}
@@ -47,13 +55,13 @@ function Login(props) {
           <Link
             to="/chat"
             onClick={(e) => (!name || !channel ? e.preventDefault() : null)}
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: "none" }}
           >
             <Button
               variant="contained"
               color="primary"
               className="login-btn"
-              style={{ margin: '10px auto' }}
+              style={{ margin: "10px auto" }}
               type="submit"
               onClick={() => {
                 if (!name || !channel) {
@@ -67,6 +75,7 @@ function Login(props) {
               Login
             </Button>
           </Link>
+          {errormsg}
         </FormControl>
       </div>
     </div>

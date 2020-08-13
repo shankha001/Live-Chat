@@ -1,47 +1,49 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import {
   selectCurrentUser,
   selectCurrentChannel,
-} from '../../redux/user/user.selectors';
+} from "../../redux/user/user.selectors";
 
-import socketIOClient from 'socket.io-client';
-import { useState } from 'react';
-import Chatbox from '../../components/chatbox/chatbox';
-import './style/chatroom.styles.scss';
-import UserInfo from '../../components/userinfo/userinfo';
+import socketIOClient from "socket.io-client";
+import { useState } from "react";
+import Chatbox from "../../components/chatbox/chatbox";
+import "./style/chatroom.styles.scss";
+import UserInfo from "../../components/userinfo/userinfo";
 
 let socket;
 
-function Chatroom({ currentUser, currentChannel }) {
-  const SERVER = 'localhost:5000';
+function Chatroom({ currentUser, currentChannel, history }) {
+  const SERVER = "localhost:5000";
 
   // socket = socketIOClient(SERVER);
-  const [users, setUsers] = useState('');
+  const [users, setUsers] = useState("");
 
-  const [chat, setChat] = useState('');
+  const [chat, setChat] = useState("");
   const [chats, setChats] = useState([]);
 
   useEffect(() => {
     socket = socketIOClient(SERVER);
 
-    socket.on('connect', function () {
+    socket.on("connect", function () {
       // console.log('connected');
     });
 
-    socket.emit('login', { currentUser, currentChannel }, (error) => {
+    socket.emit("login", { currentUser, currentChannel }, (error) => {
       if (error) {
+        // alert("error");
+        history.push("/", { error: error });
       }
     });
-  }, [SERVER, currentUser, currentChannel]);
+  }, [SERVER, currentUser, currentChannel, history]);
 
   useEffect(() => {
-    socket.on('message', (chat) => {
+    socket.on("message", (chat) => {
       setChats((chats) => [...chats, chat]);
     });
 
-    socket.on('channelUsers', ({ users }) => {
+    socket.on("channelUsers", ({ users }) => {
       setUsers(users);
     });
   }, []);
@@ -49,9 +51,9 @@ function Chatroom({ currentUser, currentChannel }) {
   const sendMessage = (event) => {
     event.preventDefault();
     if (chat) {
-      socket.emit('chat message', chat);
+      socket.emit("chat message", chat);
     }
-    setChat('');
+    setChat("");
   };
 
   return (

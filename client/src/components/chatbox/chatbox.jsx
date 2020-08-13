@@ -1,14 +1,15 @@
-import React, { useRef } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React, { useRef } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import {
   selectCurrentUser,
   selectCurrentChannel,
-} from '../../redux/user/user.selectors';
-import './style/chatbox.styles.scss';
-import SendIcon from '@material-ui/icons/Send';
-import Tooltip from '@material-ui/core/Tooltip';
-import ScrollToBottom from 'react-scroll-to-bottom';
+} from "../../redux/user/user.selectors";
+import "./style/chatbox.styles.scss";
+import SendIcon from "@material-ui/icons/Send";
+import Tooltip from "@material-ui/core/Tooltip";
+import ScrollToBottom from "react-scroll-to-bottom";
+import Button from "@material-ui/core/Button";
 
 function Chatbox({
   sendMessage,
@@ -29,7 +30,7 @@ function Chatbox({
               <div className="user__channel" id="yourDivID">
                 <span
                   style={{
-                    marginRight: ' 5px ',
+                    marginRight: " 5px ",
                   }}
                 >
                   #
@@ -37,6 +38,11 @@ function Chatbox({
                 {currentChannel}
               </div>
             </Tooltip>
+          </div>
+          <div>
+            <a href="/">
+              <Button color="secondary">LogOut</Button>
+            </a>
           </div>
         </div>
 
@@ -47,14 +53,14 @@ function Chatbox({
                 <div className="chat__msg-receiver-inner">
                   <p
                     style={{
-                      color: '#132079',
-                      marginBottom: '5px',
-                      textTransform: 'capitalize',
-                      fontWeight: '600',
-                      textAlign: 'left',
+                      color: "#132079",
+                      marginBottom: "5px",
+                      textTransform: "capitalize",
+                      fontWeight: "600",
+                      textAlign: "left",
                     }}
                   >
-                    {chat.user === 'admin' ? `👮🏻 ${chat.user}` : chat.user}
+                    {chat.user === "admin" ? `👮🏻 ${chat.user}` : chat.user}
                   </p>
                   <p>{chat.msg}</p>
                 </div>
@@ -64,10 +70,10 @@ function Chatbox({
                 <div className="chat__msg-sender-inner">
                   <p
                     style={{
-                      color: '#132079',
-                      marginBottom: '5px',
-                      fontWeight: '600',
-                      textAlign: 'left',
+                      color: "#132079",
+                      marginBottom: "5px",
+                      fontWeight: "600",
+                      textAlign: "left",
                     }}
                   ></p>
                   <p>{chat.msg}</p>
@@ -88,7 +94,7 @@ function Chatbox({
             />
             <Tooltip title="Send">
               <button type="submit" className="chat__input-btn">
-                <SendIcon style={{ fontSize: '35px', color: '#303f9f' }} />
+                <SendIcon style={{ fontSize: "35px", color: "#303f9f" }} />
               </button>
             </Tooltip>
           </form>
