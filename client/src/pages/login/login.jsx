@@ -13,8 +13,6 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 
 function Login({ setCurrentUser, setCurrentChannel, location }) {
-  console.log(location);
-  // const { setCurrentUser, setCurrentChannel } = props;
   const [errormsg, seterrormsg] = useState("");
   useEffect(() => {
     if (location.state) {

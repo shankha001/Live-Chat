@@ -10,6 +10,7 @@ import SendIcon from "@material-ui/icons/Send";
 import Tooltip from "@material-ui/core/Tooltip";
 import ScrollToBottom from "react-scroll-to-bottom";
 import Button from "@material-ui/core/Button";
+import ReactEmoji from "react-emoji";
 
 function Chatbox({
   sendMessage,
@@ -62,7 +63,7 @@ function Chatbox({
                   >
                     {chat.user === "admin" ? `👮🏻 ${chat.user}` : chat.user}
                   </p>
-                  <p>{chat.msg}</p>
+                  <p>{ReactEmoji.emojify(chat.msg)}</p>
                 </div>
               </div>
             ) : (
@@ -76,7 +77,7 @@ function Chatbox({
                       textAlign: "left",
                     }}
                   ></p>
-                  <p>{chat.msg}</p>
+                  <p>{ReactEmoji.emojify(chat.msg)}</p>
                 </div>
               </div>
             )
